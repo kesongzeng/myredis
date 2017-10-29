@@ -1,5 +1,6 @@
 package cn.kszeng.redis;
 
+import cn.kszeng.io.Resource;
 import cn.kszeng.util.StringUtil;
 import redis.clients.jedis.Jedis;
 
@@ -22,8 +23,7 @@ public class RedisSessionFactoryBuilder {
     }
 
     public RedisSessionFactoryBuilder parseConfig(String configLocation){
-        InputStream in = RedisSessionFactoryBuilder.class.getClassLoader()
-                .getResourceAsStream(configLocation);
+        InputStream in = Resource.getResourceAsStream(configLocation);
         try {
             prop = new Properties();
             prop.load(in);

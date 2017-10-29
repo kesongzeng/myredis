@@ -37,7 +37,7 @@ public class RedisTest {
         RedisSessionFactory factory = new RedisSessionFactoryBuilder()
                 .build("120.24.51.133","yhysj");
         RedisSession session = factory.openSession();
-        String value = session.selectFromDB(0,"name");
+        String value = session.selectString(0,"name");
         System.out.println(value);
     }
 
@@ -56,7 +56,7 @@ public class RedisTest {
         RedisSession session = factory.openSession();
         session.insertString("name","xxx",true);
         session.insertString("name","kslive@yeah.net",false);
-        System.out.println(session.selectFromDB(0,"name"));
+        System.out.println(session.selectString(0,"name"));
     }
 
     @Test
@@ -64,7 +64,10 @@ public class RedisTest {
         RedisSessionFactory factory = new RedisSessionFactoryBuilder()
                 .parseConfig("redis.properties").build();
         RedisSession session = factory.openSession();
-        String value = session.selectFromDB(0,"name");
+        String value = session.selectString(0,"name");
         System.out.println(value);
+        System.out.println(session.getStringLength("name"));
+        System.out.println(session.getAndSet("name","kesongzeng"));
+        System.out.println(session.getMultiString("name","email"));
     }
 }
